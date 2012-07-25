@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db.models import permalink
 from mongoengine import *
 from mongoengine.django.auth import User
 
@@ -20,3 +21,7 @@ class Post(Document):
             self.updated = now
 
         super(Post, self).save()
+
+    @permalink
+    def get_absolute_url(self):
+        return ('posts-post', (self.pk,))

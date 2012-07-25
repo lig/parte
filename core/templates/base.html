@@ -28,7 +28,18 @@
 	        </div>
 	    </div>
 	</div>
-	
+
+    {% if post_form and not form %}
+    <div class="row">
+        <div class="span6 offset3">
+	        <form class="form-inline" method="post" action="{% url posts-new %}">{% csrf_token %}
+	        {{ post_form }}
+	        <input type="submit">
+	        </form>
+        </div>
+    </div>
+    {% endif %}
+
 	{% block content %}
 	{% endblock content %}
 
