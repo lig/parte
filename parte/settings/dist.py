@@ -155,4 +155,4 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 # Registration site configuration (used in activation email text).
 # Should be redefined in local.py.
-SITE = {'name': 'demep', 'domain': 'localhost:8000'}
+SITE = {'name': 'parte', 'domain': 'localhost:8000'}

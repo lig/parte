@@ -1,0 +1,10 @@
+{% load i18n %}{% blocktrans with site_name=site.name site_domain=site.domain %}
+
+{{ site.name }} registration.
+
+
+To activate your {{ site.name }} account follow the link:
+
+http://{{ site.domain }}/accounts/activate/{{ activation_key }}/
+
+{% endblocktrans %}

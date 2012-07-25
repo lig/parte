@@ -1,0 +1,12 @@
+{% extends 'base.html' %}{% load i18n %}
+
+
+{% block content %}
+
+{% if account %}
+<p class="lead">{% blocktrans with username=account.username %}{{ username }} account activation successful.{% endblocktrans %}</p>
+{% else %}
+<p class="lead">{% blocktrans %}Account activation error.{% endblocktrans %}</p>
+{% endif %}
+
+{% endblock %}
