@@ -1,0 +1,8 @@
+{% extends 'users/profile/base.html' %}
+
+
+{% block profile-posts-active %} class="active"{% endblock %}
+
+{% block profile %}
+{% include 'posts/inc/post_list.html' %}
+{% endblock profile %}

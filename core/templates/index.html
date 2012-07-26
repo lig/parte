@@ -2,7 +2,5 @@
 
 
 {% block content %}
-{% for post in posts %}
-<div class="well">{{ post.user.username }}: {{ post.text }}</div>
-{% endfor %}
+{% include 'posts/inc/post_list.html' %}
 {% endblock content %}

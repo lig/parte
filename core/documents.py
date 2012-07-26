@@ -12,6 +12,10 @@ class Post(Document):
     updated = DateTimeField()
     text = StringField(required=True)
 
+    meta = {
+        'ordering': ['-created']
+    }
+
     def save(self, *args, **kwargs):
         now = datetime.utcnow()
 

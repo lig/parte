@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from mongoengine.django.auth import User
 from mongoengine.django.shortcuts import get_document_or_404
 
 from documents import Post
@@ -10,8 +11,19 @@ def index(request):
     return render(request, 'index.html', {'posts': Post.objects.all()})
 
 
-def profile_posts(request):
-    return render(request, 'profile/posts.html')
+def profile(request, user_id):
+    user = get_document_or_404(User, pk=user_id)
+    posts_count = Post.objects.filter(user=user).count()
+    return render(
+        request, 'users/profile/index.html',
+        {'profile': user, 'posts_count': posts_count})
+
+
+def profile_posts(request, user_id):
+    user = get_document_or_404(User, pk=user_id)
+    posts = Post.objects.filter(user=user)
+    return render(
+        request, 'users/profile/posts.html', {'profile': user, 'posts': posts})
 
 
 @login_required

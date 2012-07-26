@@ -1,0 +1,8 @@
+{% extends 'users/profile/base.html' %}{% load i18n %}
+
+
+{% block profile-active %} class="active"{% endblock %}
+
+{% block profile %}
+<div class="well">{% trans 'Posts count' %}: {{ posts_count }}</div>
+{% endblock profile %}

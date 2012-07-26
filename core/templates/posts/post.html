@@ -3,8 +3,6 @@
 
 {% block content %}
 
-<article>
-{{ post.user.username }}: {{ post.text }}
-</article>
+{% include 'posts/inc/post_short.html' %}
 
 {% endblock %}
