@@ -1,1 +1,1 @@
-<div class="well"><em><a href="{{ post.get_absolute_url }}">{{ post.created|timesince }}</em></a> {% include 'users/inc/user_short.html' with user=post.user %}: {{ post.text }}</div>
+<div class="well"><em><a href="{{ post.get_absolute_url }}">{{ post.created|timesince }}</em></a> {% include 'users/inc/user_short.html' with user=post.user %}: {{ post.text|linebreaksbr }}</div>
