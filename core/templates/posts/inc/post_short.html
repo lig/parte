@@ -1,1 +1,18 @@
-{% load i18n %}<div class="well">{% blocktrans with post_url=post.get_absolute_url timesince_post_created=post.created|timesince %}<a href="{{ post_url }}">{{ timesince_post_created }}</a> ago{% endblocktrans %} {% include 'users/inc/user_short.html' with user=post.user %}: {{ post.text|linebreaksbr }}</div>
+{% load i18n %}
+<div class="well">
+<div>{% blocktrans with post_url=post.get_absolute_url timesince_post_created=post.created|timesince %}<a href="{{ post_url }}">{{ timesince_post_created }}</a> ago{% endblocktrans %} {% include 'users/inc/user_short.html' with user=post.user %}: {{ post.text|truncatewords:25 }}</div>
+{% for comment in post.comments|slice:'-3:' %}
+{% if forloop.first %}
+<h5>{% trans 'comments' %}:</h5>
+{% endif %}
+<em>{% blocktrans with timesince_comment_created=comment.created|timesince %}{{ timesince_comment_created }} ago{% endblocktrans %} {% include 'users/inc/user_short.html' with user=comment.user %}</em>:
+{{ comment.text }}<br>
+{% if forloop.last and post.comments|length > 3 %}
+<em><a href="{{ post.get_absolute_url }}">{% trans 'more' %}</a></em>
+{% endif %}
+{% endfor %}
+<div class="comment-form-container">
+    <a href=""><i class="icon-comment"></i> {% trans 'add a comment' %}</a> 
+    <form class="form-horizontal" method="post" action="{% url posts-post-comment post.pk %}">{% csrf_token %}<i class="icon-comment"></i> <input type="text" name="text" placeholder="{% trans 'add a comment' %}" required="required"><input type="submit"></form>
+</div>
+</div>

@@ -4,5 +4,20 @@
 {% block title %} ­— {{ post.user.username }} — {{ post.text|truncatewords:10 }}{% endblock title %}
 
 {% block content %}
-{% include 'posts/inc/post_short.html' %}
+<div class="well">
+{% blocktrans with post_url=post.get_absolute_url timesince_post_created=post.created|timesince %}<a href="{{ post_url }}">{{ timesince_post_created }}</a> ago{% endblocktrans %} {% include 'users/inc/user_short.html' with user=post.user %}: {{ post.text|linebreaksbr }}
+{% for comment in post.comments %}
+{% if forloop.first %}
+<h4>{% trans 'comments' %}:</h4>
+{% endif %}
+<p>
+<em>{% blocktrans with timesince_comment_created=comment.created|timesince %}{{ timesince_comment_created }} ago{% endblocktrans %} {% include 'users/inc/user_short.html' with user=comment.user %}</em><br>
+{{ comment.text|linebreaksbr }}
+</p>
+{% endfor %}
+<form class="" method="post" action="{% url posts-post-comment post.pk %}">{% csrf_token %}
+    <textarea name="text" required="required"></textarea>
+    <input type="submit" value="{% trans 'add a comment' %}">
+</form>
+</div>
 {% endblock %}

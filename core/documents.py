@@ -18,13 +18,14 @@ class Post(Document):
     created = DateTimeField()
     updated = DateTimeField()
     text = StringField(required=True)
-    comments = SortedListField(EmbeddedDocumentField(Comment))
+    comments = ListField(EmbeddedDocumentField(Comment))
 
     meta = {
         'ordering': ['-created']
     }
 
     def save(self, *args, **kwargs):
+        print self.comments, type(self.comments)
         now = datetime.utcnow()
 
         if not self.created:
@@ -43,3 +44,7 @@ class Post(Document):
     @permalink
     def get_absolute_url(self):
         return ('posts-post', (self.pk,))
+
+    def add_comment(self, comment):
+        comment.created = datetime.utcnow()
+        Post.objects(pk=self.pk).update_one(push__comments=comment)
