@@ -1,1 +1,1 @@
-<div class="well"><em><a href="{{ post.get_absolute_url }}">{{ post.created|timesince }}</em></a> {% include 'users/inc/user_short.html' with user=post.user %}: {{ post.text|linebreaksbr }}</div>
+{% load i18n %}<div class="well">{% blocktrans with post_url=post.get_absolute_url timesince_post_created=post.created|timesince %}<a href="{{ post_url }}">{{ timesince_post_created }}</a> ago{% endblocktrans %} {% include 'users/inc/user_short.html' with user=post.user %}: {{ post.text|linebreaksbr }}</div>
