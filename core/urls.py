@@ -11,4 +11,6 @@ urlpatterns = patterns('core.views',
     url(r'^posts/(?P<post_id>\w+)/comment$', 'posts_post_comment',
         name='posts-post-comment'),
     url(r'^protocol$', 'protocol', name='protocol'),
+    url(r'^api/js/follow_button.js$', 'api_follow_button',
+        name='api-follow-button'),
 )

@@ -5,8 +5,13 @@
 
 {% block content %}
 
-<h1>{{ profile.username }}</h1>
-<p class="lead">{{ profile.email }}</p>
+<div class="row">
+	<div class="span3">
+		<div class="pull-right" id="follow_button_container"><script type="text/javascript" src="web+parte:{% url api-follow-button %}"></script></div>
+		<h1>{{ profile.username }}</h1>
+		<p class="lead">{{ profile.email }}</p>
+	</div>
+</div>
 
 <ul class="nav nav-tabs">
     <li{% block profile-active %}{% endblock %}><a href="{% url profile profile.pk %}">{% trans 'Profile' %}</a></li>

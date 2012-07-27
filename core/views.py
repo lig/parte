@@ -75,3 +75,8 @@ def protocol(request):
         return HttpResponseBadRequest()
 
     return redirect(uri_parts[1])
+
+
+def api_follow_button(request):
+    return render(request, 'api/js/follow_button.js',
+        content_type='application/javascript')
