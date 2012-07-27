@@ -9,6 +9,16 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
+{% if user.is_authenticated %}
+<script type="text/javascript">
+$(function(){
+    navigator.registerProtocolHandler(
+        "web+parte",
+        "http://{{ SITE.domain }}{% url protocol %}?uri=%s",  
+        "Parte {{ user.username }} account");
+});
+</script>
+{% endif %}
 <title>Parte{% block title %}{% endblock title %}</title>
 </head>
 <body>

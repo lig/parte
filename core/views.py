@@ -65,3 +65,13 @@ def posts_post_comment(request, post_id):
             return redirect(post.get_absolute_url())
 
     return HttpResponseBadRequest()
+
+
+@login_required
+def protocol(request):
+    uri_parts = request.GET['uri'].split(':')
+
+    if len(uri_parts) != 2 or uri_parts[0] != 'web+parte':
+        return HttpResponseBadRequest()
+
+    return redirect(uri_parts[1])

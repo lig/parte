@@ -10,4 +10,5 @@ urlpatterns = patterns('core.views',
     url(r'^posts/(?P<post_id>\w+)$', 'posts_post', name='posts-post'),
     url(r'^posts/(?P<post_id>\w+)/comment$', 'posts_post_comment',
         name='posts-post-comment'),
+    url(r'^protocol$', 'protocol', name='protocol'),
 )
